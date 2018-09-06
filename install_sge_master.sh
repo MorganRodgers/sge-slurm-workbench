@@ -77,10 +77,10 @@ sleep 3
 sudo qconf -as $HOSTNAME
 sudo qconf -ah $HOSTNAME
 
-add_worker general.q client 1
+add_worker general.q worker 1
 
 ## INSTALL CONVENIENCE DEV STUFF ##
 sudo apt install -y ruby git
 
 # Remove the bloat
-apt-get autoremove
+sudo apt-get autoremove -y
