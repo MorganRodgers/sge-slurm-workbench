@@ -19,5 +19,4 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gridengine-exec gridengin
 sudo service postfix stop
 sudo update-rc.d postfix disable
 
-# echo $MASTER_HOSTNAME | sudo tee /var/lib/gridengine/default/common/act_qmaster
 sudo service gridengine-exec restart
