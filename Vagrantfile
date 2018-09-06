@@ -2,10 +2,11 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  # config.vm.box = 'ubuntu/bionic64'
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.synced_folder ".", "/vagrant_data"
-  config.vm.synced_folder "./home", "/home/vagrant"
+  # config.vm.synced_folder "./home", "/home/vagrant"
 
 
   # # config.vm.provider "virtualbox" do |vb|
@@ -25,12 +26,12 @@ Vagrant.configure("2") do |config|
     master.vm.provision "shell", path: "install_sge_master.sh"
   end
 
-  config.vm.define "client", primary: true, autostart: true do |client|
-    client.vm.hostname = "client"
-    client.vm.network "private_network", ip: "10.0.0.101"
+  config.vm.define "worker", primary: true, autostart: true do |worker|
+    worker.vm.hostname = "worker"
+    worker.vm.network "private_network", ip: "10.0.0.101"
 
-    client.vm.provision "shell", inline: "cp -f /vagrant_data/hosts /etc/hosts"
+    worker.vm.provision "shell", inline: "cp -f /vagrant_data/hosts /etc/hosts"
 
-    client.vm.provision "shell", path: "install_sge_client.sh"
+    worker.vm.provision "shell", path: "install_sge_worker.sh"
   end
 end

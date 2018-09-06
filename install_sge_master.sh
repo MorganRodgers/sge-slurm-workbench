@@ -29,6 +29,8 @@ export -f add_worker
 ## INSTALLATION ##
 ## ============ ##
 
+sudo apt update
+
 # Configure the master hostname for Grid Engine
 echo "gridengine-master       shared/gridenginemaster string  $HOSTNAME" | sudo debconf-set-selections
 echo "gridengine-master       shared/gridenginecell   string  default" | sudo debconf-set-selections
@@ -43,7 +45,7 @@ echo "gridengine-client       shared/gridengineconfig boolean false" | sudo debc
 echo "postfix postfix/main_mailer_type        select  No configuration" | sudo debconf-set-selections
 
 # Install Grid Engine
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gridengine-master gridengine-client
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gridengine-master gridengine-client ruby
 
 # Set up Grid Engine
 sudo -u sgeadmin /usr/share/gridengine/scripts/init_cluster /var/lib/gridengine default /var/spool/gridengine/spooldb sgeadmin
@@ -76,3 +78,9 @@ sudo qconf -as $HOSTNAME
 sudo qconf -ah $HOSTNAME
 
 add_worker general.q client 1
+
+## INSTALL CONVENIENCE DEV STUFF ##
+sudo apt install -y ruby git
+
+# Remove the bloat
+apt-get autoremove
