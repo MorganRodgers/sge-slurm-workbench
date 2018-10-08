@@ -1,7 +1,7 @@
 #!/bin/bash
 export MASTER_HOSTNAME=master
 
-sudo apt update
+sudo apt-get update
 
 echo "gridengine-common       shared/gridenginemaster string  $MASTER_HOSTNAME" | sudo debconf-set-selections
 echo "gridengine-common       shared/gridenginecell   string  default" | sudo debconf-set-selections

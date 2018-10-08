@@ -29,7 +29,7 @@ export -f add_worker
 ## INSTALLATION ##
 ## ============ ##
 
-sudo apt update
+sudo apt-get update
 
 # Configure the master hostname for Grid Engine
 echo "gridengine-master       shared/gridenginemaster string  $HOSTNAME" | sudo debconf-set-selections
@@ -80,7 +80,14 @@ sudo qconf -ah $HOSTNAME
 add_worker general.q worker 1
 
 ## INSTALL CONVENIENCE DEV STUFF ##
-sudo apt install -y ruby git
+sudo apt-get install -y ruby git
+
+sudo apt-get install software-properties-common
+sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-get update
+sudo apt-get install rvm
+sudo usermod -a -G rvm vagrant
+rvm install 2.4
 
 # Remove the bloat
 sudo apt-get autoremove -y
