@@ -85,7 +85,7 @@ sudo apt-get install -y ruby git
 sudo apt-get install software-properties-common
 sudo apt-add-repository -y ppa:rael-gc/rvm
 sudo apt-get update
-sudo apt-get install rvm
+sudo apt-get install rvm -y
 sudo usermod -a -G rvm vagrant
 rvm install 2.4
 

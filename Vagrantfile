@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant_data"
   # config.vm.synced_folder "./home", "/home/vagrant"
 
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
 
   # # config.vm.provider "virtualbox" do |vb|
   # #    vb.gui = false
