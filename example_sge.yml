@@ -1,0 +1,13 @@
+---
+v2:
+  metadata:
+    title: "Example SGE Cluster"
+  login:
+    host: "head"
+  job:
+    adapter: "sge"
+    cluster: "head"
+    bin: "/opt/sge/bin/lx-amd64"
+    conf: "/etc/default/gridengine"
+    sge_root: "/opt/sge"
+    libdrmaa_path: "/opt/sge/lib/lx-amd64/libdrmaa.so"
