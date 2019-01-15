@@ -3,8 +3,8 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "centos/7"
-  config.vm.synced_folder ".", "/vagrant", type: "sshfs"
-  config.vm.synced_folder "./ood-home", "/home/ood", type: "sshfs", mount_options: ["uid=1001","gid=1001"]
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  config.vm.synced_folder "./ood-home", "/home/ood", type: "virtualbox", mount_options: ["uid=1001","gid=1001"]
   config.ssh.forward_x11 = true
 
   config.vm.define "ood", primary: true, autostart: true do |ood|
@@ -25,6 +25,7 @@ Vagrant.configure(2) do |config|
     ood.vm.provision "shell", path: "slurm-setup.sh"
     ood.vm.provision "shell", path: "install_sge.sh"
   end
+  
   config.vm.define "head", primary: false, autostart: true do |head|
     head.vm.network "private_network", ip: "10.0.0.101"
     head.vm.provision "shell", path: "head-setup.sh"
