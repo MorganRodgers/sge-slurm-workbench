@@ -1,21 +1,20 @@
 #!/bin/bash
-set -e
+set -x
 
 add_operator() {
-	SGE_ROOT=/opt/sge /opt/sge/bin/lx-amd64/qconf -ao "$1"
+  SGE_ROOT=/opt/sge /opt/sge/bin/lx-amd64/qconf -ao "$1"
 }
 
 export -f add_operator
 
 yum install -y yum-plugin-copr
 yum copr enable -y loveshack/SGE
+yum install -y gridengine gridengine-qmaster gridengine-qmon gridengine-execd
 
-# head
-yum install -y gridengine gridengine-qmaster gridengine-qmon gridengine-execd expect
 (
-	cd "/opt/sge" || exit 1
-	/vagrant/expect_files/run_install_qmaster.exp
-	SGE_ROOT=/opt/sge /vagrant/expect_files/run_install_execd.exp
+  cd "/opt/sge" || exit 1
+  /opt/sge/install_qmaster -munge -auto /vagrant/sge.conf
+  /opt/sge/install_execd -munge -auto /vagrant/sge.conf
 )
 
 add_operator "vagrant"
